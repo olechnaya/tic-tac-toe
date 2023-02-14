@@ -4,10 +4,30 @@
 # БЛОК 4 Обеспечение взаимодествия всех трёх блоков
 
 def show_playground(f):
-    col_names ='  1 2 3'
-    print(col_names)
-    for row, i in zip(field, col_names.split()):
-        print(f'{i} {" ".join(str(j) for j in row)}')
+    # отрисовка именований колонок/столбцов
+    print('  1 2 3')
+    
+    # отрисовка построчно именование строки и три терешки
+    # 0 ---
+    # 1 ---
+    # 2 ---
+
+
+    #  Вариант 1
+    #     for i in range(len(field)):
+    #         print(str(i) + ' '.join(field[i]))
+
+    #  Вариант 2
+    #   for row, i in zip(field, num.split()):
+    #       print(f'{i} {" ".join(str(j) for j in row)}')
+
+    #  Вариант "примитив первого уровня"
+    for i in [0,1,2]:
+        print(i+1,' '.join(field[i]))
+    
+    #  Вариант "примитив второго уровня"
+    #   for i in range(3):
+    #     print(i,' '.join(field[i]))
 
 def user_input(f):
    
@@ -43,20 +63,25 @@ def user_input(f):
     return x-1,y-1
 
 def win_combo(f, user):
-    f_list=[]
-    print(f)
-    
-    for l in f:
-        f_list+=l
-    
-    print(f_list)
-    positions =[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-    indexes = set([i for i, x in enumerate(f_list) if x == user])
 
-    for p in positions:
-        if len(indexes.intersection(set(p)))==3:
+    #локальная функция - проверка линии
+    def check_line(cell1, cell2, cell3, current_user):
+        if cell1 == current_user and cell2 == current_user and cell3 == current_user:
             return True
+    
+    # в цикле для всех вариантов столбцов
+    for n in range(3):
+        # проверяем строки
+        # проверяем колонки
+        # проверяем диагонали
+        if check_line(f[n][0], f[n][1], f[n][2], user) or \
+            check_line(f[0][n], f[1][n], f[2][n], user) or \
+            check_line(f[0][0], f[1][1], f[2][2], user) or \
+            check_line(f[2][0], f[1][1], f[0][2], user):
+            return True
+    
     return False
+# TODO: вкурить и реализовать win_v3 42:40
 
 # TODO: спросить имена пользователей
 #       спросить как они выберут, чем играть: сами договорятся или рандомно назначить игроку его символ
@@ -79,7 +104,7 @@ def win_combo(f, user):
 #создание списка тирешек, выступающих в роли поля
 field = [['-']*3 for _ in range(3)] 
 
-def lets_play(field):
+def lets_play(f):
 
     # создаем переменную счётчик для отслеживания очередности хода игрока
     # и проверки окончания игры
