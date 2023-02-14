@@ -83,29 +83,33 @@ def win_combo(f, user):
     
     return False
 
-
-
-count = 0
 #создание списка тирешек, выступающих в роли поля
 field = [['-']*3 for _ in range(3)] 
 
-while True:
-    
-    if count % 2 == 0:
-        user = 'x'
-    else:
-        user = 'o'
-    show_playground(field)
-    x,y = user_input(field)
-    field[x][y] = user
+def lets_play(f):
 
-    if count == 9:
-        print("Игра окончена - ничья")
+    # создаем переменную счётчик для отслеживания очередности хода игрока
+    # и проверки окончания игры
+    count = 0
+
+    while True:
     
-    if win_combo(field, user):
+        if count % 2 == 0:
+            user = 'x'
+        else:
+            user = 'o'
         show_playground(field)
-        print(f"Пользователь {user} выиграл")
-        break
+        x,y = user_input(field)
+        field[x][y] = user
 
-    count += 1
+        if count == 9:
+            print("Игра окончена - ничья")
         
+        if win_combo(field, user):
+            show_playground(field)
+            print(f"Пользователь {user} выиграл")
+            break
+
+        count += 1
+
+lets_play(field)
