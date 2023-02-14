@@ -83,6 +83,24 @@ def win_combo(f, user):
     
     return False
 
+# TODO: спросить имена пользователей
+#       спросить как они выберут, чем играть: сами договорятся или рандомно назначить игроку его символ
+#       реализовать работу с возвращаемыми значениями в lets_play()
+# def hello():
+#     # count = 0 
+#     user1 = input("Имя?...")
+#     symbol1 = input("Какй символ выбираете?...")
+
+#     user2 = input("Имя?...")
+#     symbol2 = input("Какй символ выбираете?...")
+
+#     player1 = {"name" : user1, "symbol": symbol1}
+#     player2 = {"name" : user2, "symbol": symbol2}
+    
+#     print(player1,player2,end='\n')
+
+#     return ....
+
 #создание списка тирешек, выступающих в роли поля
 field = [['-']*3 for _ in range(3)] 
 
@@ -90,8 +108,8 @@ def lets_play(f):
 
     # создаем переменную счётчик для отслеживания очередности хода игрока
     # и проверки окончания игры
-    count = 0
-
+    count = 0 
+   
     while True:
     
         if count % 2 == 0:
